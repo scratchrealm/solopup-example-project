@@ -33,7 +33,7 @@ def main():
                     print('No gui_data.uri found')
                     gui_data_uri = None
                 if gui_data_uri is not None:
-                    vocalizations_gh_uri = f'gh://scratchrealm/solopup-example-project/datasets/{folder_name}/annotations.uri'
+                    vocalizations_gh_uri = f'gh://scratchrealm/solopup-example-project/main/datasets/{folder_name}/annotations.uri'
                     state = {'vocalizations': vocalizations_gh_uri}
                     state_json = json.dumps(state, separators=(',', ':'))
                     url = f'https://figurl.org/f?v=gs://figurl/neurostatslab-views-1dev6&d={gui_data_uri}&s={state_json}&label={dataset_id}'
