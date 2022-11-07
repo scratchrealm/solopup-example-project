@@ -5,10 +5,12 @@ import yaml
 import pickle
 import numpy as np
 from figurl.core.serialize_wrapper import _serialize
+import click
 
 
-def main():
-    dirname = '.'
+@click.command(help="Auto-detect vocalization intervals")
+@click.argument('dirname')
+def main(dirname: str):
     with open(f'{dirname}/config.yml', 'r') as f:
         config = yaml.safe_load(f)
     print('USING CONFIG')

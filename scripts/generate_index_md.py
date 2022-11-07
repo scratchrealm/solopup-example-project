@@ -2,10 +2,12 @@ import os
 import yaml
 import json
 from typing import List
+import click
 
 
-def main():
-    dirname = '.'
+@click.command(help="Auto-generate index.md")
+@click.argument('dirname')
+def main(dirname: str):
     datasets_dirname = f'{dirname}/datasets'
     output_fname = f'{dirname}/index.md'
 
@@ -38,7 +40,7 @@ def main():
                     state_json = json.dumps(state, separators=(',', ':'))
                     url = f'https://figurl.org/f?v=gs://figurl/neurostatslab-views-1dev6&d={gui_data_uri}&s={state_json}&label={dataset_id}'
                     markdown_lines.append('')
-                    markdown_lines.append(url)
+                    markdown_lines.append(f'[Open dataset for visualization and editing]({url})')
             else:
                 print('No config.yml found')
     markdown = '\n'.join(markdown_lines)

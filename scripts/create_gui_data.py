@@ -3,10 +3,11 @@ import yaml
 import pickle
 import numpy as np
 from figurl.core.serialize_wrapper import _serialize
+import click
 
-
-def main():
-    dirname = '.'
+@click.command(help="Create the data needed for the figurl GUI")
+@click.argument('dirname')
+def create_gui_data(dirname: str):
     with open(f'{dirname}/config.yml', 'r') as f:
         config = yaml.safe_load(f)
     print('USING CONFIG')
@@ -56,4 +57,4 @@ def main():
         f.write(gui_data_uri)
 
 if __name__ == '__main__':
-    main()
+    create_gui_data()
