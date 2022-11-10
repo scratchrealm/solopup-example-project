@@ -10,6 +10,8 @@ Assume the ID of the dataset is `dataset1`
 
 Create a new dataset directory `datasets/dataset1` and copy a .h5 audio file and a .avi video file into the directory.
 
+---
+
 Create a .ogv video file in the directory using the following command (fill in `<filename>`).
 
 ```bash
@@ -17,13 +19,26 @@ cd datasets/dataset1
 ffmpeg -i <filename>.avi -c:v libtheora -q:v 7 -c:a libvorbis -q:a 4 <filename>.ogv
 ```
 
+If you encounter encoder errors with your version of ffmpeg, you can use singularity and instead run
+
+```bash
+# on the flatiron cluster, run "module load singularity"
+singularity exec docker://jrottenberg/ffmpeg singularity ffmpeg -i <filename>.avi -c:v libtheora -q:v 7 -c:a libvorbis -q:a 4 <filename>.ogv
+```
+
+---
+
 Store the .ogv video file in kachery using the following command (fill in `<filename>`) and make a note of the kachery URI.
 
 ```bash
 kachery-cloud-store <filename>.ogv
 ```
 
+---
+
 Create a new `config.yml` file in the directory and set the appropriate fields using the config file for one of the existing datasets as a template.
+
+---
 
 Create a `spectrograms.pkl` file
 
@@ -31,17 +46,23 @@ Create a `spectrograms.pkl` file
 python scripts/create_spectrograms.py datasets/dataset1
 ```
 
+---
+
 Auto-detect the vocalization intervals
 
 ```bash
 python scripts/auto_detect_vocalizations.py datasets/dataset1
 ```
 
+---
+
 Create the data for the figurl GUI
 
 ```bash
 python scripts/create_gui_data.py datasets/dataset1
 ```
+
+---
 
 Finally, update the index.md file (see below) and add/commit/push the new files to Github.
 
