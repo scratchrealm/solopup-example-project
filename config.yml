@@ -1,1 +1,5 @@
 project_base_uri: gh://scratchrealm/solopup-example-project
+datasets:
+  - "2022_01_17_13_59_02_792530"
+  - "example_dataset_001"
+  - "example_dataset_002"
