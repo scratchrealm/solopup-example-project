@@ -43,6 +43,11 @@ def main(dirname: str):
                     markdown_lines.append(f'[Open dataset for visualization and editing]({url})')
             else:
                 print('No config.yml found')
+    markdown_lines.append('')
+    markdown_lines.append('---')
+    markdown_lines.append('')
+    markdown_lines.append('This file was auto-generated.')
+
     markdown = '\n'.join(markdown_lines)
 
     print(f'Writing {output_fname}')

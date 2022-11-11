@@ -8,6 +8,7 @@ import click
 @click.command(help="Create the data needed for the figurl GUI")
 @click.argument('dirname')
 def create_gui_data(dirname: str):
+    # Read the config for the dataset
     with open(f'{dirname}/config.yml', 'r') as f:
         config = yaml.safe_load(f)
     print('USING CONFIG')
@@ -15,6 +16,8 @@ def create_gui_data(dirname: str):
 
     if 'video_uri' not in config:
         raise Exception('No video_uri in config')
+    
+    # Get the video information
     video_uri = config['video_uri']
     video_sr_hz = config['video_sr_hz']
     video_dims = config['video_dims']
@@ -22,23 +25,22 @@ def create_gui_data(dirname: str):
     print(f'Video sampling rate (Hz): {video_sr_hz}')
     print(f'Video dims: {video_dims}')
 
-    output_fname = f'{dirname}/gui_data.uri'
-
+    # Load the spectrograms data file
     spectrograms_fname = f'{dirname}/spectrograms.pkl'
     print(f'Loading {spectrograms_fname}')
     with open(spectrograms_fname, 'rb') as f:
         a = pickle.load(f)
-    spectrogram_for_data: np.ndarray = a['spectrogram_for_gui']
+    spectrogram_for_gui: np.ndarray = a['spectrogram_for_gui']
     t: np.ndarray = a['t']
     sr_spectrogram = 1 / (t[1] - t[0])
-
     print(f'Spectrogram sampling rate (Hz): {sr_spectrogram}')
 
+    # Assemble the data for the figure
     print('Assembling data')
     data = {
         'type': 'neurostatslab.AnnotateVocalizations',
         'spectrogram': {
-            'data': spectrogram_for_data.T,
+            'data': spectrogram_for_gui.T,
             'samplingFrequency': sr_spectrogram
         },
         'video': {
@@ -49,9 +51,12 @@ def create_gui_data(dirname: str):
         }
     }
 
+    # Store the data in kachery
     print('Storing data in kachery')
     gui_data_uri = kcl.store_json(_serialize(data, compress_npy=True))
 
+    # Write to gui_data.uri
+    output_fname = f'{dirname}/gui_data.uri'
     print(f'Writing {output_fname}')
     with open(output_fname, 'w') as f:
         f.write(gui_data_uri)
