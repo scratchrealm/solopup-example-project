@@ -54,7 +54,3 @@ python scripts/generate_index_md.py .
 ```
 
 Then add/commit/push the new files to Github.
-
-
-
-
