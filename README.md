@@ -64,11 +64,15 @@ python scripts/create_gui_data.py datasets/dataset1
 
 ---
 
+Add the name of the dataset directory to the list in the config.yml at the root of a project
+
+---
+
 Finally, update the index.md file (see below) and add/commit/push the new files to Github.
 
 ## Updating the auto-generated index
 
-To auto-generate index.md based on the contents of `datasets/`, fill in the fields of `config.yml` and then run
+To auto-generate index.md based on the datasets listed in `config.yml` and the contents of `datasets/`, run
 
 ```bash
 python scripts/generate_index_md.py .
