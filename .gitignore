@@ -3,3 +3,4 @@
 *.ogv
 *.npy
 *.pkl
+__pycache__

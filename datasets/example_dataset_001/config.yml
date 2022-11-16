@@ -1,6 +1,8 @@
-dataset_id: "example_dataset_001"
-video_uri: "sha1://54c5a68707779d3e920c70443bced94250154af1?label=2022_01_17_13_59_02_792530_cam_a.ogv"
-video_dims: [512, 630]
-video_sr_hz: 30
 audio_sr_hz: 125000
+dataset_id: example_dataset_001
 duration_sec: 300
+video_dims:
+- 512
+- 640
+video_sr_hz: 30.0
+video_uri: sha1://54c5a68707779d3e920c70443bced94250154af1?label=2022_01_17_13_59_02_792530_cam_a.ogv
