@@ -1,6 +1,6 @@
 audio_sr_hz: 125000
 dataset_id: example_dataset_001
-duration_sec: 300
+duration_sec: 900.0
 video_dims:
 - 512
 - 640

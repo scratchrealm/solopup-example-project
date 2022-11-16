@@ -12,13 +12,13 @@ Create a new dataset directory `datasets/dataset1` and copy a .h5 audio file and
 
 ---
 
-Create a `config.yml` file in the dataset directory to include the following fields (see example `config.yml` files in existing directories):
+Initialize the dataset using the following command from the root directory of the project
 
-```yaml
-dataset_id: example_dataset_001 # the ID of the dataset
-audio_sr_hz: 125000 # the sampling rate for the audio
-duration_sec: 300 # the duration of the audio you wish to process
+```bash
+python scripts/init_dataset.py datasets/dataset1
 ```
+
+This will create a `config.yml` file in the dataset directory including some meta information obtained from the .h5 file.
 
 ---
 
@@ -38,7 +38,7 @@ singularity exec docker://jrottenberg/ffmpeg singularity ffmpeg -i <filename>.av
 
 ---
 
-Store the .ogv video file in kachery and update `config.yml` for the dataset using the following command.
+Store the .ogv video file in kachery and update `config.yml` for the dataset using the following command from the project root directory
 
 ```bash
 python scripts/upload_video.py datasets/dataset1
